@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Districts</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="page-header">
+    <h1>Malawi Tripartite Elections Database</h1>
+  </header>
+
+  <div class="main-container">
+    <nav class="navbar" aria-label="Main Navigation">
+      <ul>
+        <li><a href="dashboard.ejs" class="nav-link">Dashboard</a></li>
+        <li><a href="index.ejs" class="nav-link">Citizens</a></li>
+        <li><a href="voters.ejs" class="nav-link">Voters</a></li>
+        <li class="dropdown">
+          <a href="#" class="nav-link dropbtn active" aria-haspopup="true" aria-expanded="false">Locations</a>
+          <div class="dropdown-content">
+            <a href="index2.ejs">Regions</a>
+            <a href="districts.ejs">Districts</a>
+            <a href="const.ejs">Constituencies</a>
+            <a href="wards.ejs">Wards</a>
+            <a href="polling.ejs">Polling Centers</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="registeredCands.ejs" class="nav-link dropbtn" aria-haspopup="true" aria-expanded="false">Candidates</a>
+          <div class="dropdown-content">
+            <a href="presidents.ejs">Presidential</a>
+            <a href="parlimentary.ejs">Parliamentary</a>
+            <a href="local.ejs">Local Government</a>
+          </div>
+        </li>
+        <li><a href="index4.ejs" class="nav-link">Political Parties</a></li>
+        <li><a href="votes.ejs" class="nav-link">Cast Votes</a></li>
+        <li><a href="complaints.ejs" class="nav-link">Complaints</a></li>
+      </ul>
+    </nav>
+
+    <main class="data-view">
+      <div class="content-wrapper">
+        <h2>Districts</h2>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>District ID</th>
+              <th>District Name</th>
+              <th>Region Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (districts && districts.length) { %>
+              <% districts.forEach(district => { %>
+                <tr>
+                  <td><%= district.districtID %></td>
+                  <td><%= district.district_name %></td>
+                  <td><%= district.region_name %></td>
+                </tr>
+              <% }); %>
+            <% } else { %>
+              <tr><td colspan="3" class="no-data">No district data available.</td></tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; Malawi Elections Database. All Rights Reserved. Vera Mhango</p>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>

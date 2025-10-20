@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="page-header">
+    <h1>Malawi Tripartite Elections Database</h1>
+  </header>
+
+  <div class="main-container">
+    <nav class="navbar" aria-label="Main Navigation">
+      <ul>
+        <li><a href="dashboard.ejs" class="nav-link active">Dashboard</a></li>
+        <li><a href="index.ejs" class="nav-link">Citizens</a></li>
+        <li><a href="voters.ejs" class="nav-link">Voters</a></li>
+        <li class="dropdown">
+          <a href="#" class="nav-link dropbtn" aria-haspopup="true" aria-expanded="false">Locations</a>
+          <div class="dropdown-content">
+            <a href="index2.ejs">Regions</a>
+            <a href="districts.ejs">Districts</a>
+            <a href="const.ejs">Constituencies</a>
+            <a href="wards.ejs">Wards</a>
+            <a href="polling.ejs">Polling Centers</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="registeredCands.ejs" class="nav-link dropbtn" aria-haspopup="true" aria-expanded="false">Candidates</a>
+          <div class="dropdown-content">
+            <a href="presidents.ejs">Presidential</a>
+            <a href="parlimentary.ejs">Parliamentary</a>
+            <a href="local.ejs">Local Government</a>
+          </div>
+        </li>
+        <li><a href="index4.ejs" class="nav-link">Political Parties</a></li>
+        <li><a href="votes.ejs" class="nav-link">Cast Votes</a></li>
+        <li><a href="complaints.ejs" class="nav-link">Complaints</a></li>
+      </ul>
+    </nav>
+
+    <main class="data-view">
+    <div class="content-wrapper">
+        <h2>Winning Candidates</h2>
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th>Election Type</th>
+                <th>Candidate Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% if (winners && winners.length) { %>
+                <% winners.forEach(winner => { %>
+                <tr>
+                    <td><%= winner.election_type %></td>
+                    <td><%= winner.candidate_name %></td>
+                </tr>
+                <% }); %>
+            <% } else { %>
+                <tr><td colspan="2" class="no-data">No winners data available.</td></tr>
+            <% } %>
+            </tbody>
+        </table>
+        </div>
+    
+        <div class="content-wrapper">
+        <h2>Unregistered Males and Females</h2>
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th>Gender</th>
+                <th>Percentage Unregistered</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% if (unregistered && unregistered.length) { %>
+                <% unregistered.forEach(item => { %>
+                <tr>
+                    <td><%= item.gender %></td>
+                    <td><%= item.percentage_unregistered %>%</td>
+                </tr>
+                <% }); %>
+            <% } else { %>
+                <tr><td colspan="2" class="no-data">No data available.</td></tr>
+            <% } %>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="content-wrapper">
+        <h2>Candidates Who Did Not Register to Vote</h2>
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th>Percentage</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% if (unregisteredCandidates && unregisteredCandidates.length) { %>
+                <% unregisteredCandidates.forEach(item => { %>
+                <tr>
+                    <td><%= item.percentage_unregistered_candidates %>%</td>
+                </tr>
+                <% }); %>
+            <% } else { %>
+                <tr><td class="no-data">No data available.</td></tr>
+            <% } %>
+            </tbody>
+        </table>
+        </div>
+
+        
+  <div class="content-wrapper">
+    <h2>Null and Void Votes by Ward</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Ward Name</th>
+                <th>Number of Null/Void Votes</th>
+                <th>Percentage of Total Votes (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% if (nullVotes && nullVotes.length) { %>
+            <% nullVotes.forEach(vote => { %>
+            <tr>
+                <td><%= vote.ward %></td>
+                <td><%= vote.number_null_void %></td>
+                <td><%= vote.percentage %>%</td>
+            </tr>
+            <% }); %>
+        <% } else { %>
+            <tr><td colspan="3" class="no-data">No null votes data available.</td></tr>
+        <% } %>
+        </tbody>
+    </table>
+</div>
+
+<div class="content-wrapper">
+<h2>Gender-Based Votes Percentage</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Total Voters</th>
+          <th>Count of Votes</th>
+          <th>Percentage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (genderForGender && genderForGender.length) { %>
+          <% genderForGender.forEach(stat => { %>
+            <tr>
+              <td><%= stat.metric %></td>
+              <td><%= stat.total_voters %></td>
+              <td><%= stat.count_of_votes %></td>
+              <td><%= stat.percentage %>%</td>
+            </tr>
+          <% }); %>
+        <% } else { %>
+          <tr><td colspan="4" class="no-data">No gender voting stats available.</td></tr>
+        <% } %>
+      </tbody>
+    </table>
+    </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; Malawi Elections Database. All Rights Reserved. Vera Mhango</p>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>
