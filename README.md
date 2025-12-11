@@ -64,5 +64,3 @@ This project was created for academic learning to practice:
 ## 📝 Notes
 
 You can extend this project with features like authentication, role-based access, or a fully deployed database.
-
-If you want, I can make it even shorter, more formal, more stylish, or more “portfolio-ready.” Just say the word.
